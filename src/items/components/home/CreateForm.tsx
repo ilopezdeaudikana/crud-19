@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { TextField, Button, Box, Typography } from '@mui/material'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { ItemsService } from '../services/api'
+import { ItemsService } from '@/services/items.service'
 
 function CreateForm() {
   const queryClient = useQueryClient()

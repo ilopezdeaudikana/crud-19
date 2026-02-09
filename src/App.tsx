@@ -1,7 +1,7 @@
 import { Container } from '@mui/material'
 import { Routes, Route } from 'react-router-dom'
-import HomePage from './pages/HomePage'
-import UpdateItemPage from './pages/UpdateItemPage'
+import HomePage from './items/views/HomePage'
+import UpdateItemPage from './items/views/UpdateItemPage'
 
 const App = () => {
   return (

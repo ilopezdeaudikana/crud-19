@@ -1,5 +1,5 @@
-import CreateForm from '../components/CreateForm'
-import ItemList from '../components/ItemList'
+import CreateForm from '../components/home/CreateForm'
+import ItemList from '../components/home/ItemList'
 import { Box } from '@mui/material'
 
 const HomePage = () => {

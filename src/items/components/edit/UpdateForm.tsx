@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import type { Item } from '../types'
-import { ItemsService } from '../services/api'
+import type { Item } from '../../types/items'
+import { ItemsService } from '../../../services/items.service'
 import { TextField, Button, Box, Stack } from '@mui/material'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
