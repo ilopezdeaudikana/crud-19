@@ -20,7 +20,9 @@ function CreateForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const formData = new FormData(event.currentTarget)
+    const form = event.currentTarget
+
+    const formData = new FormData(form)
     const title = (formData.get('title') as string) ?? ''
     const description = (formData.get('description') as string) ?? ''
 
@@ -30,7 +32,7 @@ function CreateForm() {
     }
 
     await createMutation.mutateAsync({ title, description })
-    event.currentTarget.reset()
+    form?.reset()
   }
 
   return (

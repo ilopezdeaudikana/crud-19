@@ -1,19 +1,15 @@
 import { createContext, useContext, useState } from 'react'
-import type { Item } from '../types/items'
 
 type StarredItemsContextValue = {
   starredIds: Set<number>
   isStarred: (id: number) => boolean
   toggleStar: (id: number) => void
   unstar: (id: number) => void
-  items: Item[]
-  setCurrentItems: (items: Item[]) => void
 }
 
 const StarredItemsContext = createContext<StarredItemsContextValue | undefined>(undefined)
 
 export const StarredItemsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<Item[]>([])
 
   const [starredIds, setStarredIds] = useState<Set<number>>(new Set())
 
@@ -40,9 +36,6 @@ export const StarredItemsProvider: React.FC<{ children: React.ReactNode }> = ({ 
     })
   }
 
-  const setCurrentItems = (items: Item[]) => {
-    setItems(items)
-  }
 
   return (
     <StarredItemsContext.Provider
@@ -50,9 +43,7 @@ export const StarredItemsProvider: React.FC<{ children: React.ReactNode }> = ({ 
         starredIds,
         isStarred,
         toggleStar,
-        unstar,
-        setCurrentItems,
-        items
+        unstar
       }}
   >
       {children}
