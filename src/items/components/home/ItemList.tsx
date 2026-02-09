@@ -1,28 +1,26 @@
 import ItemListSkeleton from './ItemListSkeleton'
-import { Box, Button, Paper, Stack, Typography, Dialog } from '@mui/material'
+import { Box, Button, Paper, Stack, Typography, Dialog, IconButton } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ItemsService } from '@/services/items.service'
 import { useState } from 'react'
+import { useStarredItems } from '@/items/context/StarredItemsContext'
+import { useItems } from '@/items/context/ItemsContext'
 
 const ItemList = () => {
   const [openDialog, setOpenDialog] = useState(false)
   const [currentId, setCurrentId] = useState<number | null>(null)
+  const { isStarred, toggleStar, unstar } = useStarredItems()
   
   const queryClient = useQueryClient()
-  const {
-    data: items = [],
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ['items'],
-    queryFn: ItemsService.fetchItems,
-  })
+  const { items, isLoading, isError, error } = useItems()
 
   const deleteMutation = useMutation({
     mutationFn: (id: number) => ItemsService.deleteItem(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['items'] }),
+    onSuccess: (_data, id) => {
+      unstar(id)
+      queryClient.invalidateQueries({ queryKey: ['items'] })
+    },
   })
 
   const handleDelete = (id: number) => {
@@ -72,6 +70,16 @@ const ItemList = () => {
                 </Typography>
                 <Typography sx={{ mb: 1.5 }}>{item.description}</Typography>
                 <Stack direction="row" spacing={1.25}>
+                  <IconButton
+                    data-testid={`star-button-${item.id}`}
+                    aria-label={isStarred(item.id) ? 'Unstar item' : 'Star item'}
+                    onClick={() => toggleStar(item.id)}
+                    color={isStarred(item.id) ? 'warning' : 'default'}
+                  >
+                    <Box component="span" sx={{ fontSize: 20, lineHeight: 1 }}>
+                      {isStarred(item.id) ? '★' : '☆'}
+                    </Box>
+                  </IconButton>
                   <Button
                     data-testid={`edit-button-${item.id}`}
                     variant="contained"
