@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <ItemsProvider>
       <StarredItemsProvider>
-        <div className="flex" style={{ columnGap: '2rem' }}>
+        <div className="flex gap-x-4 min-h-screen">
           <div className="basis-2/3 flex-shrink">
             <Box sx={{ py: 4 }}>
               <CreateForm />

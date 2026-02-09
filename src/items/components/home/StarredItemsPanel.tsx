@@ -1,4 +1,4 @@
-import { Box, IconButton, Stack, Typography, Drawer, Divider } from '@mui/material'
+import { Box, IconButton, Stack, Typography, Paper, Divider } from '@mui/material'
 import { useStarredItems } from '@/items/context/StarredItemsContext'
 import { useItems } from '@/items/context/ItemsContext'
 import { Fragment } from 'react'
@@ -8,15 +8,12 @@ const StarredItemsPanel: React.FC = () => {
   const { isStarred, toggleStar } = useStarredItems()
   const starredItems = items.filter(item => isStarred(item.id))
 
-  const isOpen = true
-
   return (
-    <Drawer
-      anchor="right"
-      open={isOpen}
-      variant='permanent'
+    <Paper
       sx={{
         p: 2,
+        width: '100%',
+        minHeight: '100vh',
       }}
     >
       <Box
@@ -35,7 +32,7 @@ const StarredItemsPanel: React.FC = () => {
           <Typography color="text.secondary">No starred items yet.</Typography>
         ) : (
           <Stack spacing={1}>
-            {starredItems.map((item, index) => (
+            {starredItems.map((item) => (
               <Fragment key={item.id}>
                 <Box
                   key={item.id}
@@ -66,7 +63,7 @@ const StarredItemsPanel: React.FC = () => {
           </Stack>
         )}
       </Box>
-    </Drawer>
+    </Paper>
   )
 }
 
