@@ -8,7 +8,7 @@ export const Navigation = (): React.JSX.Element => {
   ]
 
   return (
-    <Paper sx={{ minHeight: '100vh'}}>
+    <Paper sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', gap:'1rem', padding: '2rem'}}>
       {navLinks}
     </Paper>
   )

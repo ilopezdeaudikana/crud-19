@@ -8,9 +8,8 @@ import { Navigation } from '@/common/nav.component'
 const App = () => {
 
   return (
-    <>
-      <Navigation />
-      <div className="container min-h-screen min-w-screen pl-4">
+      <div className="container min-h-screen min-w-screen flex gap-x-6">
+        <Navigation />
         <Routes>
           <Route path="/" element={<ItemsView />} />
           <Route path="/items" element={<ItemsView />} />
@@ -19,7 +18,7 @@ const App = () => {
           <Route path="/foo/:id/edit" element={<UpdateFooView />} />
         </Routes>
       </div>
-    </>
+    
   )
 }
 

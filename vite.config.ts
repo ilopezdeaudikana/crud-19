@@ -7,7 +7,6 @@ import path from 'path'
 export default defineConfig(({ mode }) => {
 
   const env = loadEnv(mode, process.cwd(), '')
-  console.log(env.API_URL)
   return {
     define: {
       __API_URL__: JSON.stringify(env.API_URL),

@@ -2,7 +2,7 @@ import CreateForm from '../components/home/create-form.component'
 import ItemList from '../components/home/item-list.component'
 import StarredItemsPanel from '../components/home/starred-items-panel.component'
 import { Box } from '@mui/material'
-import { ItemsProvider } from '@/items/context/ItemsContext'
+import { ItemsProvider } from '@/items/context/items.context'
 
 export const ItemsView = () => {
   return (

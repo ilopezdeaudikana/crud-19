@@ -1,6 +1,6 @@
 import type { Foo } from "@/foo/types/foo"
 
-const API_URL = `${import.meta.env.VITE_API_URL}/foo`
+const API_URL = `${__API_URL__}/foo`
 
 export const FooService = {
 

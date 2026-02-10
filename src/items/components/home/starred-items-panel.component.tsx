@@ -1,6 +1,6 @@
 import { Box, IconButton, Stack, Typography, Paper, Divider } from '@mui/material'
-import { useStarredItems } from '@/items/context/StarredItemsContext'
-import { useItems } from '@/items/context/ItemsContext'
+import { useStarredItems } from '@/items/context/starred-items.context'
+import { useItems } from '@/items/context/items.context'
 import { Fragment } from 'react'
 
 const StarredItemsPanel: React.FC = () => {

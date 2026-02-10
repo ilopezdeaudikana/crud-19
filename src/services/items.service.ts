@@ -2,7 +2,6 @@ import type { Item } from '../items/types/items'
 
 const API_URL = `${__API_URL__}/items`
 
-console.log(import.meta.env)
 export const ItemsService = {
   async fetchItems(): Promise<Item[]> {
     try {
