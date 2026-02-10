@@ -25,4 +25,3 @@ A small CRUD app built with React, Vite, MUI, and TanStack Query. It includes a 
 
 ## Notes
 - API base URL is defined in `src/services/api.ts`.
-- You can toggle mock data in `src/services/api.ts` with the `USE_MOCK` flag.

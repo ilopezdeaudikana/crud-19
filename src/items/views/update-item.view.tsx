@@ -2,10 +2,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, CircularProgress, Typography } from '@mui/material'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { ItemsService } from '../../services/items.service'
-import UpdateForm from '../components/edit/UpdateForm'
+import UpdateForm from '../components/edit/update-form.component'
 import type { Item } from '../types/items'
 
-const UpdateItemPage = () => {
+export const UpdateItemView = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
@@ -66,5 +66,3 @@ const UpdateItemPage = () => {
     </Box>
   )
 }
-
-export default UpdateItemPage

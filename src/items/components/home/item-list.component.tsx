@@ -1,4 +1,4 @@
-import ItemListSkeleton from './ItemListSkeleton'
+import ItemListSkeleton from './item-list-skeleton.component'
 import { Box, Button, Paper, Stack, Typography, Dialog, IconButton } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'

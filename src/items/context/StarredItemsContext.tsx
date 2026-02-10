@@ -1,61 +1,43 @@
-import type { ProviderProps } from '@/types/provider'
-import { createContext, useContext, useState } from 'react'
+import { useCallback, useMemo } from 'react'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { selectStarredById, toggleStar, unstar } from '@/store/starredItemsSlice'
 
-type StarredItemsContextValue = {
+type StarredItemsValue = {
   starredIds: Set<number>
   isStarred: (id: number) => boolean
   toggleStar: (id: number) => void
   unstar: (id: number) => void
 }
 
-const StarredItemsContext = createContext<StarredItemsContextValue | undefined>(undefined)
+export const useStarredItems = (): StarredItemsValue => {
+  const dispatch = useAppDispatch()
+  const starredById = useAppSelector(selectStarredById)
 
-export const StarredItemsProvider = ({ children }: ProviderProps): React.JSX.Element => {
-
-  const [starredIds, setStarredIds] = useState<Set<number>>(new Set())
-
-  const isStarred = (id: number) => starredIds.has(id)
-
-  const toggleStar = (id: number) => {
-    setStarredIds(prev => {
-      const next = new Set(prev)
-      if (next.has(id)) {
-        next.delete(id)
-      } else {
-        next.add(id)
-      }
-      return next
-    })
-  }
-
-  const unstar = (id: number) => {
-    setStarredIds(prev => {
-      if (!prev.has(id)) return prev
-      const next = new Set(prev)
-      next.delete(id)
-      return next
-    })
-  }
-
-
-  return (
-    <StarredItemsContext.Provider
-      value={{
-        starredIds,
-        isStarred,
-        toggleStar,
-        unstar
-      }}
-  >
-      {children}
-    </StarredItemsContext.Provider>
+  const starredIds = useMemo(
+    () => new Set(Object.keys(starredById).map(Number)),
+    [starredById],
   )
-}
 
-export const useStarredItems = () => {
-  const context = useContext(StarredItemsContext)
-  if (!context) {
-    throw new Error('useStarredItems must be used within StarredItemsProvider')
+  const isStarred = useCallback((id: number) => Boolean(starredById[id]), [starredById])
+
+  const handleToggleStar = useCallback(
+    (id: number) => {
+      dispatch(toggleStar(id))
+    },
+    [dispatch],
+  )
+
+  const handleUnstar = useCallback(
+    (id: number) => {
+      dispatch(unstar(id))
+    },
+    [dispatch],
+  )
+
+  return {
+    starredIds,
+    isStarred,
+    toggleStar: handleToggleStar,
+    unstar: handleUnstar,
   }
-  return context
 }

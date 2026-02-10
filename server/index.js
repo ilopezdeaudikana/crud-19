@@ -10,6 +10,13 @@ let items = [
 
 let nextId = 3
 
+let foos = [
+  { id: 1, bar: 'Alpha', baz: 'First foo' },
+  { id: 2, bar: 'Beta', baz: 'Second foo' },
+]
+
+let nextFooId = 3
+
 const sendJson = (res, status, payload) => {
   const body = JSON.stringify(payload)
   res.writeHead(status, {
@@ -65,6 +72,9 @@ const normalizeDescription = body => {
   return ''
 }
 
+const normalizeBar = body => (typeof body?.bar === 'string' ? body.bar.trim() : '')
+const normalizeBaz = body => (typeof body?.baz === 'string' ? body.baz.trim() : '')
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url ?? '/', `http://${req.headers.host ?? 'localhost'}`)
   const { pathname } = url
@@ -95,6 +105,33 @@ const server = http.createServer(async (req, res) => {
       }
       items.push(newItem)
       sendJson(res, 201, newItem)
+    } catch (error) {
+      sendJson(res, 400, { error: 'Invalid JSON payload' })
+    }
+    return
+  }
+
+  if (req.method === 'GET' && pathname === '/foo') {
+    sendJson(res, 200, foos)
+    return
+  }
+
+  if (req.method === 'POST' && pathname === '/foo') {
+    try {
+      const body = await parseBody(req)
+      const bar = normalizeBar(body)
+      const baz = normalizeBaz(body)
+      if (!bar || !baz) {
+        sendJson(res, 400, { error: 'Invalid payload' })
+        return
+      }
+      const newFoo = {
+        id: nextFooId++,
+        bar,
+        baz,
+      }
+      foos.push(newFoo)
+      sendJson(res, 201, newFoo)
     } catch (error) {
       sendJson(res, 400, { error: 'Invalid JSON payload' })
     }
@@ -140,6 +177,46 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === 'DELETE') {
       items = items.filter(item => item.id !== id)
+      sendNoContent(res)
+      return
+    }
+  }
+
+  const fooMatch = pathname.match(/^\/foo\/(\d+)$/)
+  if (fooMatch) {
+    const id = Number(fooMatch[1])
+    const existing = foos.find(foo => foo.id === id)
+
+    if (!existing) {
+      sendJson(res, 404, { error: 'Foo not found' })
+      return
+    }
+
+    if (req.method === 'GET') {
+      sendJson(res, 200, existing)
+      return
+    }
+
+    if (req.method === 'PUT') {
+      try {
+        const body = await parseBody(req)
+        const bar = normalizeBar(body)
+        const baz = normalizeBaz(body)
+        if (!bar || !baz) {
+          sendJson(res, 400, { error: 'Invalid payload' })
+          return
+        }
+        const updated = { id, bar, baz }
+        foos = foos.map(foo => (foo.id === id ? updated : foo))
+        sendJson(res, 200, updated)
+      } catch (error) {
+        sendJson(res, 400, { error: 'Invalid JSON payload' })
+      }
+      return
+    }
+
+    if (req.method === 'DELETE') {
+      foos = foos.filter(foo => foo.id !== id)
       sendNoContent(res)
       return
     }

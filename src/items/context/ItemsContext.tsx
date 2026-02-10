@@ -25,9 +25,9 @@ export const ItemsProvider= ({ children } : ProviderProps): React.JSX.Element =>
   })
 
   return (
-    <ItemsContext.Provider value={{ items, isLoading, isError, error }}>
+    <ItemsContext value={{ items, isLoading, isError, error }}>
       { children }
-    </ItemsContext.Provider>
+    </ItemsContext>
   )
 }
 
