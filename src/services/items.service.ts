@@ -1,4 +1,4 @@
-import type { Item } from '../types'
+import type { Item } from '../items/types/items'
 
 const API_URL = 'http://localhost:3001/items'
 const USE_MOCK = false

@@ -1,3 +1,4 @@
+import type { ProviderProps } from '@/types/provider'
 import { createContext, useContext, useState } from 'react'
 
 type StarredItemsContextValue = {
@@ -9,7 +10,7 @@ type StarredItemsContextValue = {
 
 const StarredItemsContext = createContext<StarredItemsContextValue | undefined>(undefined)
 
-export const StarredItemsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const StarredItemsProvider = ({ children }: ProviderProps): React.JSX.Element => {
 
   const [starredIds, setStarredIds] = useState<Set<number>>(new Set())
 

@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import type { Item } from '@/items/types/items'
 import { ItemsService } from '@/services/items.service'
+import type { ProviderProps } from '@/types/provider'
 
 type ItemsContextValue = {
   items: Item[]
@@ -12,7 +13,7 @@ type ItemsContextValue = {
 
 const ItemsContext = createContext<ItemsContextValue | undefined>(undefined)
 
-export const ItemsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ItemsProvider= ({ children } : ProviderProps): React.JSX.Element => {
   const {
     data: items = [],
     isLoading,
@@ -25,7 +26,7 @@ export const ItemsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   return (
     <ItemsContext.Provider value={{ items, isLoading, isError, error }}>
-      {children}
+      { children }
     </ItemsContext.Provider>
   )
 }
