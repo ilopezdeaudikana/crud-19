@@ -4,10 +4,12 @@ import { UpdateItemView } from './items/views/update-item.view'
 import { NewItemView } from './items/views/create-item.view'
 import { FooView } from './foo/views/foo.view'
 import { Navigation } from '@/common/nav.component'
+import { ErrorBoundary } from 'react-error-boundary'
 
 const App = () => {
 
   return (
+    <ErrorBoundary fallback={<p>Something went wrong. Is the server running at all?</p>}>
       <div className="container min-h-screen min-w-screen flex gap-x-6">
         <Navigation />
         <Routes>
@@ -18,7 +20,7 @@ const App = () => {
           <Route path="/items/:id/edit" element={<UpdateItemView />} />
         </Routes>
       </div>
-    
+    </ErrorBoundary>
   )
 }
 
