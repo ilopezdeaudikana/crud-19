@@ -2,10 +2,14 @@ import { useState } from 'react'
 import { TextField, Button, Box, Typography } from '@mui/material'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ItemsService } from '@/services/items.service'
+import { useNavigate } from 'react-router-dom'
+import { useItems } from '@/items/context/items.context'
 
 function CreateForm() {
   const queryClient = useQueryClient()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  // const {} = useItems()
+  const navigate = useNavigate()
 
   const createMutation = useMutation({
     mutationFn: ItemsService.createItem,
@@ -33,6 +37,7 @@ function CreateForm() {
 
     await createMutation.mutateAsync({ title, description })
     form?.reset()
+    navigate('/items')
   }
 
   return (

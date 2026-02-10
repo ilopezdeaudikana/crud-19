@@ -19,8 +19,8 @@ const UpdateForm: React.FC<UpdateFormProps> = ({ item, onUpdate }) => {
     mutationFn: (payload: Omit<Item, 'id'>) => ItemsService.updateItem(item.id, payload),
     onSuccess: () => {
       setErrorMessage(null)
-      queryClient.invalidateQueries({ queryKey: ['items'] })
-      queryClient.invalidateQueries({ queryKey: ['item', item.id] })
+      queryClient.invalidateQueries({ queryKey: ['items'], refetchType: 'none' })
+      queryClient.removeQueries({ queryKey: ['item', item.id] })
       onUpdate?.()
     },
     onError: error => {

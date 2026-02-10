@@ -17,6 +17,7 @@ export const UpdateItemView = () => {
     queryKey: ['item', itemId],
     queryFn: () => ItemsService.fetchItem(itemId as number),
     enabled: itemId !== null,
+    refetchOnMount: 'always',
     initialData: () => {
       const items = queryClient.getQueryData<Item[]>(['items'])
       return items?.find(i => i.id === itemId)
