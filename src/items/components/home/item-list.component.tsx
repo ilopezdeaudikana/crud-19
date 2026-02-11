@@ -4,8 +4,8 @@ import { Link as RouterLink } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ItemsService } from '@/services/items.service'
 import { useState } from 'react'
-import { useStarredItems } from '@/items/context/starred-items.context'
-import { useItems } from '@/items/context/items.context'
+import { useStarredItems } from '@/items/hooks/starred-items.hook'
+import { useItems } from '@/items/hooks/items.hook'
 
 const ItemList = () => {
   const [openDialog, setOpenDialog] = useState(false)

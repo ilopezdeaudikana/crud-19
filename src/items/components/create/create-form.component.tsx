@@ -3,7 +3,7 @@ import { TextField, Button, Box, Typography } from '@mui/material'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ItemsService } from '@/services/items.service'
 import { useNavigate } from 'react-router-dom'
-import { useItems } from '@/items/context/items.context'
+import { useItems } from '@/items/hooks/items.hook'
 
 function CreateForm() {
   const queryClient = useQueryClient()
