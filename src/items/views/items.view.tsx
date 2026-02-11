@@ -3,7 +3,7 @@ import StarredItemsPanel from '../components/home/starred-items-panel.component'
 import { Box, Link } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-export const ItemsView = () => {
+const ItemsView = () => {
   const navigate = useNavigate()
 
   return (
@@ -26,3 +26,5 @@ export const ItemsView = () => {
     </div>
   )
 }
+
+export default ItemsView

@@ -3,7 +3,7 @@ import { FooList } from '../components/foo-list.component'
 import { useQuery } from '@tanstack/react-query'
 import { FooService } from '@/services/foo.service'
 
-export const FooView = (): React.JSX.Element => {
+const FooView = (): React.JSX.Element => {
 
   const {
     data: foo,
@@ -26,3 +26,5 @@ export const FooView = (): React.JSX.Element => {
     </>
   )
 }
+
+export default FooView

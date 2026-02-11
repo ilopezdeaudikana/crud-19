@@ -5,7 +5,7 @@ import { ItemsService } from '../../services/items.service'
 import UpdateForm from '../components/edit/update-form.component'
 import type { Item } from '../types/items'
 
-export const UpdateItemView = () => {
+const UpdateItemView = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
@@ -67,3 +67,5 @@ export const UpdateItemView = () => {
     </Box>
   )
 }
+
+export default UpdateItemView
