@@ -37,5 +37,17 @@ export const FooService = {
     } catch (error) {
       throw new Error(`Delete request failed: ${error}`)
     }
+  },
+
+  async createFoo(foo: Foo): Promise<Foo | undefined> {
+    try {
+      const response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(foo)})
+      if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`)
+      }
+      return await response.json()
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

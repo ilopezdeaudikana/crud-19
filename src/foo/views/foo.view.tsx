@@ -1,10 +1,12 @@
-import { Typography } from '@mui/material'
+import { Link, Typography } from '@mui/material'
 import { FooList } from '../components/foo-list.component'
 import { useQuery } from '@tanstack/react-query'
 import { FooService } from '@/services/foo.service'
+import { useNavigate } from 'react-router-dom'
 
 const FooView = (): React.JSX.Element => {
 
+  const navigate = useNavigate()
   const {
     data: foo,
     isPending,
@@ -12,12 +14,20 @@ const FooView = (): React.JSX.Element => {
     error
   } = useQuery({
     queryFn: FooService.getFoo,
-    queryKey:['foo']
+    queryKey: ['foo']
   })
-  
+
   return (
-    <> 
-      { isError && !isPending && <Typography>Something went wrong {error.message}</Typography>}
+    <>
+      <Link
+        component='a'
+        data-testid='create-new-foo'
+        onClick={() => navigate('/foo/create')}
+        sx={{ mb: 2, display: 'block', cursor: 'pointer' }}
+      >
+        Create new foo
+      </Link>
+      {isError && !isPending && <Typography>Something went wrong {error.message}</Typography>}
       {isPending && <Typography>Loading Foo</Typography>}
       {foo && foo.length ?
         <FooList list={foo} />

@@ -7,6 +7,7 @@ const ItemsView = lazy(() => import('./items/views/items.view'))
 const UpdateItemView = lazy(() => import('./items/views/update-item.view'))
 const NewItemView = lazy(() => import('./items/views/create-item.view'))
 const FooView = lazy(() => import('./foo/views/foo.view'))
+const NewFooView = lazy(() => import('./foo/views/create-foo.view'))
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/" element={<ItemsView />} />
             <Route path="/items" element={<ItemsView />} />
             <Route path="/foo" element={<FooView />} />
+            <Route path="/foo/create" element={<NewFooView />} />
             <Route path="/items/create" element={<NewItemView />} />
             <Route path="/items/:id/edit" element={<UpdateItemView />} />
           </Routes>

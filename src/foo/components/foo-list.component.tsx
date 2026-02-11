@@ -98,9 +98,22 @@ export const FooList = ({ list }: FooListProps): React.JSX.Element => {
                   }
                 </TableCell>
                 <TableCell align="right">
-                  {editing && editing === row.id ? <Button onClick={() => saveFoo(row.id)}>Save</Button> : <Button onClick={() => setEditing(row.id)}>Edit</Button>}
+                  {editing && editing === row.id ? 
+                    <Button 
+                      data-testid={`save-foo-${row.id}`}
+                      onClick={() => saveFoo(row.id)}
+                    >
+                      Save
+                    </Button> : 
+                    <Button 
+                      data-testid={`edit-foo-${row.id}`}
+                      onClick={() => setEditing(row.id)}
+                    >
+                      Edit
+                    </Button>
+                  }
                 </TableCell>
-                <TableCell align="right"><Button onClick={() => deleteFoo(row.id)}>Delete</Button></TableCell>
+                <TableCell align="right"><Button data-testid={`delete-foo-${row.id}`} onClick={() => deleteFoo(row.id)}>Delete</Button></TableCell>
               </TableRow>
             ))}
           </TableBody>

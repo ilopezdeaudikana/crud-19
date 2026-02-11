@@ -12,6 +12,7 @@ const ItemsView = () => {
         <Box sx={{ py: 4 }}>
           <Link
             component='a'
+            data-testid='create-new-item'
             onClick={() => navigate('/items/create')}
             sx={{ mb: 2, display: 'block', cursor: 'pointer' }}
           >
