@@ -1,4 +1,4 @@
-import { Link, Typography } from '@mui/material'
+import { Link, Stack, Typography } from '@mui/material'
 import { FooList } from '../components/foo-list.component'
 import { useQuery } from '@tanstack/react-query'
 import { FooService } from '@/services/foo.service'
@@ -19,20 +19,22 @@ const FooView = (): React.JSX.Element => {
 
   return (
     <>
-      <Link
-        component='a'
-        data-testid='create-new-foo'
-        onClick={() => navigate('/foo/create')}
-        sx={{ mb: 2, display: 'block', cursor: 'pointer' }}
-      >
-        Create new foo
-      </Link>
-      {isError && !isPending && <Typography>Something went wrong {error.message}</Typography>}
-      {isPending && <Typography>Loading Foo</Typography>}
-      {foo && foo.length ?
-        <FooList list={foo} />
-        : <Typography>No results</Typography>
-      }
+      <Stack direction="column">
+        <Link
+          component='a'
+          data-testid='create-new-foo'
+          onClick={() => navigate('/foo/create')}
+          sx={{ mt: 2, ml: 4, display: 'block', cursor: 'pointer' }}
+        >
+          Create new foo
+        </Link>
+        {isError && !isPending && <Typography>Something went wrong {error.message}</Typography>}
+        {isPending && <Typography>Loading Foo</Typography>}
+        {foo && foo.length ?
+          <FooList list={foo} />
+          : <Typography>No results</Typography>
+        }
+      </Stack>
     </>
   )
 }
