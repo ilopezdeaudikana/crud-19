@@ -20,7 +20,7 @@ A small CRUD app built with React, Vite, MUI, and TanStack Query. It includes a 
 - `npm run preview`: preview the production build
 - `npm run lint`: run ESLint
 - `npm run lint:fix`: run ESLint with auto-fix
-- `npm run test:ui`: run unit tests
+- `npm run test:unit`: run unit tests
 - `npm run test:e2e`: run Playwright e2e tests (expects API server on `http://localhost:3001`)
 
 ## Notes
