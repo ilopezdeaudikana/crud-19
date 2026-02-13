@@ -1,7 +1,7 @@
 import { Box, Paper, Table, TableBody, TableCell, TableHead, TableRow, TableContainer, Button, TextField } from '@mui/material'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { FooService } from '@/services/foo.service'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { Foo } from '../types/foo'
 
 type FooListProps = {
@@ -49,8 +49,6 @@ export const FooList = ({ list }: FooListProps): React.JSX.Element => {
       console.log(error)
     }
   }
-
-  useEffect(() => updateFoo(list ?? []), [list])
 
   return (
     <Box sx={{ padding: '2rem' }}>
